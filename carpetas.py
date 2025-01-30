@@ -10,13 +10,13 @@ def organizar_descargas():
         "Programas": [".exe", ".msi"],
         "Comprimidos": [".zip", ".rar", ".7z"],
         "Programacion" : [".py" , ".js"],
-        "Otros": []  # No necesita extensiones específicas
+        "Otros": []  
     }
 
     for archivo in os.listdir(carpeta_descargas):
         ruta_archivo = os.path.join(carpeta_descargas, archivo)
 
-        if os.path.isfile(ruta_archivo):  # Solo procesamos archivos
+        if os.path.isfile(ruta_archivo): 
             extension = os.path.splitext(archivo)[1].lower()
             movido = False
 
@@ -28,11 +28,10 @@ def organizar_descargas():
                     movido = True
                     break
 
-            if not movido:  # Si no se movió, va a la carpeta "Otros"
+            if not movido:
                 carpeta_destino = os.path.join(carpeta_descargas, "Otros")
                 os.makedirs(carpeta_destino, exist_ok=True)
                 shutil.move(ruta_archivo, os.path.join(carpeta_destino, archivo))
 
-# Corre la función solo si el script se ejecuta directamente
 if __name__ == "__main__":
     organizar_descargas()
